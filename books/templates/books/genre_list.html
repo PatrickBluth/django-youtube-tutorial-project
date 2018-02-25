@@ -1,0 +1,5 @@
+<body>
+{% for genre in genres %}
+<h1><a href="{% url 'books:book_list' genre=genre %}">{{ genre.topic }}</a>
+{% endfor %}
+</body>
