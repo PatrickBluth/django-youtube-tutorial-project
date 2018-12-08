@@ -36,3 +36,19 @@ def book_create(request, genre):
                 return HttpResponseRedirect(book.get_absolute_url())
 
     return render(request, 'books/book_form.html', {'form': form, 'genre': genre})
+
+
+def book_edit(request, genre, book_url):
+    genre = get_object_or_404(models.Genre, topic=genre)
+    book_title = book_url.replace('-', ' ')
+    book = get_object_or_404(models.Book, genre=genre, title=book_title)
+    form = forms.BookForm(instance=book)
+
+    if request.method == 'POST':
+        form = forms.BookForm(instance=book, data=request.POST)
+        if 'book_save' in form.data:
+            if form.is_valid():
+                book = form.save(commit=False)
+                form.save()
+                return HttpResponseRedirect(book.get_absolute_url())
+    return render(request, 'books/book_form.html', {'form': form, 'genre': genre})
