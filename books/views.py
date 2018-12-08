@@ -1,5 +1,6 @@
 from django.http import Http404, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
+from django.urls import reverse
 
 from . import models, forms
 
@@ -51,4 +52,7 @@ def book_edit(request, genre, book_url):
                 book = form.save(commit=False)
                 form.save()
                 return HttpResponseRedirect(book.get_absolute_url())
-    return render(request, 'books/book_form.html', {'form': form, 'genre': genre})
+        if 'book_delete' in form.data:
+            book.delete()
+            return HttpResponseRedirect(reverse('books:book_list', kwargs={'genre': genre}))
+    return render(request, 'books/book_form.html', {'form': form, 'genre': genre, 'book': book})
