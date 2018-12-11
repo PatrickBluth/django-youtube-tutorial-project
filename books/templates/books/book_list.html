@@ -1,6 +1,9 @@
-<body>
+{% extends 'layout.html' %}
+
+{% block title %}{{genre}}{% endblock %}
+{% block content %}
 {% for book in books %}
 <h1><a href="{% url 'books:book_detail' genre=book.genre.topic book_url=book.title_to_url %}">{{ book.title }}</a></h1>
 {% endfor %}
 <a href="{% url 'books:book_create' genre=genre %}">New Book</a>
-</body>
+{% endblock %}

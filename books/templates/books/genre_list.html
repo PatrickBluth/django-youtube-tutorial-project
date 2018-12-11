@@ -1,5 +1,8 @@
-<body>
+{% extends 'layout.html' %}
+
+{% block content %}
 {% for genre in genres %}
-<h1><a href="{% url 'books:book_list' genre=genre %}">{{ genre.topic }}</a>
+<h1><a href="{% url 'books:book_list' genre=genre %}">{{ genre.topic }}</a></h1>
 {% endfor %}
-</body>
+{% endblock %}
+
