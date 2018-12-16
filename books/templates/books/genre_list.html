@@ -1,8 +1,11 @@
 {% extends 'layout.html' %}
+{% load humanize %}
 
 {% block content %}
+
+<h1>We offer the following {{genres.count|apnumber}} genre{{genres.count|pluralize}}:</h1>
 {% for genre in genres %}
-<h1><a href="{% url 'books:book_list' genre=genre %}">{{ genre.topic }}</a></h1>
+<h3><a href="{% url 'books:book_list' genre=genre %}">{{ genre.topic }}</a></h3>
 {% endfor %}
 {% endblock %}
 
