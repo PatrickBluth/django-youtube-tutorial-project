@@ -1,3 +1,5 @@
+{% load books_extras %}
+{% all_genres start_char='f' as genres %}
 <!doctype html>
 <html lang="en">
   <head>
@@ -33,12 +35,12 @@
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown link
+              Genres
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="#">Action</a>
-              <a class="dropdown-item" href="#">Another action</a>
-              <a class="dropdown-item" href="#">Something else here</a>
+              {% for genre in genres %}
+              <a class="dropdown-item" href="{% url 'books:book_list' genre=genre %}">{{genre.topic}}</a>
+              {% endfor %}
             </div>
           </li>
         </ul>
