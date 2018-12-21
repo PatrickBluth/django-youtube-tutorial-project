@@ -1,8 +1,10 @@
 {% load static %}
+{% load books_extras %}
 <link rel="stylesheet" href="{% static 'books/css/styles.css' %}">
 <body>
 <h1>{{book.title}}</h1>
 <h3>By: {{book.author}}</h3>
 <p>{{book.description}}</p>
+<p>Number of page: {{book.page_length}} Estimated time to read: {{book.page_length|read_time_estimate}} hour{{book.page_length|read_time_estimate|pluralize}}</p>
 <button><a href="{% url 'books:book_edit' genre=book.genre book_url=book.title_to_url %}">Edit Book</a></button>
 </body>

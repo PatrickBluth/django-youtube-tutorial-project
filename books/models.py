@@ -14,6 +14,7 @@ class Book(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     genre = models.ForeignKey(Genre, on_delete=models.CASCADE)
+    page_length = models.IntegerField(max_length=5)
 
     def __str__(self):
         return self.title
